@@ -1,0 +1,66 @@
+//java.awt.geom.Ellipse2D.Double
+javax.swing.JFrame
+java.awt.geom.RectangularShape or java.awt.geom.Rectangle2D(.Double)
+java.awt.AWTKeyStroke
+java.awt.event.ActionEvent
+Interface ActionListener
+
+
+/**
+ * Write a description of class MovingRectangle here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+//import java.util.Scanner;
+public class MovingRectangle extends JComponent
+{
+    private Rectangle rect;
+    private int x = 0;
+    private int y = 100;
+    private int width = 100;
+    private int height = 100;
+    
+    public MovingRectangle()
+    {
+        rect = new Rectangle(x,y,width,height);
+    }
+    
+    public void paintComponent (Graphics g)
+    {
+        Graphics2D g2 = (Graphics2D)g;
+        g2.draw(rect);
+    }
+    
+    public void moveBy (int x, int y)
+    {
+        rect.translate(x,y);
+        repaint(); //recalls the paintComponent method
+    }
+    
+    public static void main (String args[])
+    {
+        JFrame frame = new JFrame();
+        frame.setSize(1000,1000);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MovingRectangle rect = new MovingRectangle();
+        frame.add(rect);
+        frame.setVisible(true);
+        
+        class TimerListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                if ()
+                rect.moveBy(1,0);
+            }
+        }
+        
+        ActionListener listener = new TimerListener();
+        Timer t = new Timer(10, listener); //delays by 500 milliseconds
+        t.start();
+    }
+}
